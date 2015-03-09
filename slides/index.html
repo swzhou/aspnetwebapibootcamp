@@ -51,10 +51,40 @@
 					<section>
 						<h2>Routing</h2>
 						<ul>
-							<li>Find controller</li>
-							<li>Find action</li>
-							<li>bind parameter(s)</li>
+							<li>Matching the URI to a route template.</li>
+							<li>Selecting a controller.</li>
+							<li>Selecting an action.</li>
 						</ul>
+					</section>
+					<section>
+						<h2>Route templates</h2>
+						<p>URI with placeholder values</p>
+						<blockquote>"api/{controller}/public/{category}/{id}"</blockquote>
+					</section>
+					<section>
+						<h2>Controller selection</h2>
+						<ol>
+							<li>Look in the route dictionary for the key "controller".</li>
+							<li>Take the value for this key and append the string "Controller" to get the type name.</li>
+							<li>
+								Look for a Web API controller with this type name - IHttpControllerTypeResolver
+								<ul class="fragment">
+									<li>implement IHttpController</li>
+									<li>are not abstract</li>
+									<li>have a name that ends in "Controller"</li>
+								</ul>
+							</li>
+						</ol>
+					</section>
+					<section>
+						<h2>Action Selection</h2>
+						<blockquote>IHttpActionSelector.SelectAction (HttpControllerContext) -> HttpActionDescriptor</blockquote>
+						<ol>
+							<li class="fragment">Create a list of all actions on the controller that match the HTTP request method.</li>
+							<li class="fragment">If the route dictionary has an "action" entry, remove actions whose name does not match this value.</li>
+							<li class="fragment">Try to match action parameters to the URI.</li>
+							<li class="fragment">Ignore actions with the [NonAction] attribute.</li>
+						</ol>
 					</section>
 					<section>
 						<h2>Routing Variations</h2>
@@ -64,6 +94,27 @@
 							<li>Non-Actions: NonAction</li>
 						</ul>
 					</section>
+					<section>
+						<h2>Extension Points</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Interface</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr class="fragment"><td>IHttpControllerSelector</td><td>Selects the controller.</td></tr>
+								<tr class="fragment"><td>IHttpControllerTypeResolver</td><td>Gets the list of controller types.</td></tr>
+								<tr class="fragment"><td>IHttpControllerTypeResolver</td><td>Gets the list of controller types.</td></tr>
+								<tr class="fragment"><td>IAssembliesResolver</td><td>Get the list of project assemblies.</td></tr>
+								<tr class="fragment"><td>IHttpControllerActivator</td><td>Create new controller instances.</td></tr>
+								<tr class="fragment"><td>IHttpActionSelector</td><td>Selects the action.</td></tr>
+								<tr class="fragment"><td>IHttpActionInvoker</td><td>Invokes the action.</td></tr>
+							</tbody>
+						</table>
+					</section>
+
 				</section>
 				<section>
 					<section>
@@ -78,19 +129,19 @@
 							<tbody>
 								<tr>
 									<td>void</td>
-									<td class="fragments">Return empty 204 (No Content)</td>
+									<td class="fragment">Return empty 204 (No Content)</td>
 								</tr>
 								<tr>
 									<td>HttpResponseMessage</td>
-									<td class="fragments">Convert directly to an HTTP response message</td>
+									<td class="fragment">Convert directly to an HTTP response message</td>
 								</tr>
 								<tr>
 									<td>IHttpActionResult</td>
-									<td class="fragments">Call ExecuteAsync to create an HttpResponseMessage, then convert to an HTTP response message.</td>
+									<td class="fragment">Call ExecuteAsync to create an HttpResponseMessage, then convert to an HTTP response message.</td>
 								</tr>
 								<tr>
 									<td>Other type</td>
-									<td class="fragments">Write the serialized return value into the response body; return 200 (OK).</td>
+									<td class="fragment">Write the serialized return value into the response body; return 200 (OK).</td>
 								</tr>
 							</tbody>
 						</table>
@@ -99,8 +150,8 @@
 						<h2>Why IHttpActionResult?</h2>
 						<ul>
 							<li>Simplifies unit testings of controller.</li>
-							<li>Moves common logic for creating HTTP responses into separate classes.</li>
-							<li>Make the intent of the controller action clearer by hiding the low-level details of constructing the response.</li>
+							<li class="fragment">Moves common logic for creating HTTP responses into separate classes.</li>
+							<li class="fragment">Make the intent of the controller action clearer by hiding the low-level details of constructing the response.</li>
 						</ul>
 					</section>
 					<section>
