@@ -48,6 +48,32 @@
 					</p>
 				</section>
 				<section>
+					<h2>Agenda</h2>
+					<ul>
+						<li>Http message lifecycle</li>
+						<li>
+							Basic extension point
+							<ul>
+								<li>Message handlers</li>
+								<li>Action filters</li>
+							</ul>
+						</li>
+						<li>
+							Advanced extension point
+							<ul>
+								<li>Dependency Injection</li>
+								<li>Model Binding</li>
+								<li>Result Conversion</li>
+							</ul>
+						</li>
+					</ul>
+				</section>
+				<section>
+				<a href="http://www.asp.net/media/4071077/aspnet-web-api-poster.pdf" target="_blank">
+					<img src="images/message_lifecycle.png">
+				</a>
+				</section>
+				<section>
 					<section>
 						<h2>Http Message Handlers</h2>
 						<img src="images/webapi_handler.png">
@@ -62,7 +88,7 @@
 					</section>
 					<section>
 						<h2>How to customize?</h2>
-						<pre><code class="java">
+						<pre><code data-trim contenteditable class="c#">
 Task&lt;HttpResponseMessage&gt; SendAsync(
     HttpRequestMessage request, 
     CancellationToken cancellationToken);							
