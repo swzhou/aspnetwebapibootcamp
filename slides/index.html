@@ -15,11 +15,11 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
 		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+		<link rel="stylesheet" href="css/theme/night.css" id="theme">
 
 		<!-- Code syntax highlighting -->
 		<link rel="stylesheet" href="lib/css/zenburn.css">
-
+		<link rel="stylesheet" href="css/slides.css">
 		<!-- Printing and PDF exports -->
 		<script>
 			var link = document.createElement( 'link' );
@@ -46,6 +46,64 @@
 					<p>
 						<small>Shiwei Zhou</small>
 					</p>
+				</section>
+				<section>
+					<section>
+						<h2>Http Message Handlers</h2>
+						<img src="images/webapi_handler.png">
+					</section>
+					<section>
+						<h2>Predefined Message Handlers</h2>
+						<ul>
+							<li><span class="highlight">HttpServer</span>: gets the request from the host.</li>
+							<li><span class="highlight">HttpRoutingDispatcher</span>: dispatches the request based on the route.</li>
+							<li><span class="highlight">HttpControllerDispatcher</span>: sends the request to a Web API controller.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>How to customize?</h2>
+						<pre><code class="java">
+Task&lt;HttpResponseMessage&gt; SendAsync(
+    HttpRequestMessage request, 
+    CancellationToken cancellationToken);							
+						</code></pre>
+						<ol>
+							<li>Process the request message.</li>
+							<li>Call base.SendAsync to send the request to the inner handler.</li>
+							<li>The inner handler returns a response  message. (asynchronous)</li>
+							<li>Process the response and return it to the caller.</li>
+						</ol>
+					</section>
+					<section>
+						<h2>When to use?</h2>
+						<blockquote class="fragment"><span class="highlight">cross-cutting</span> concerns <br/>operate at the level of <span class="highlight">HTTP messages</span></blockquote>
+						<ul class="fragment">
+							<li>Read or modify request headers.</li>
+							<li>Add a response header to responses.</li>
+							<li>Validate requests before they reach the controller.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Examples</h2>
+						<ul>
+							<li>X-HTTP-Method-Override</li>
+							<li>JSON Vulnerability Protection</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Pre-Route Message Handlers</h2>
+						<img src="images/webapi_handler_1.png">
+					</section>
+					<section data-transition="none">
+						<h2>Pre-Route Message Handlers</h2>
+						<img src="images/webapi_handler_2.png">
+					</section>
+					<section>
+						<h2>Examples</h2>
+						<ul>
+							<li>Checking for an API Key</li>
+						</ul>
+					</section>
 				</section>
 				<section>
 					<section>
@@ -105,7 +163,6 @@
 							</thead>
 							<tbody>
 								<tr class="fragment"><td>IHttpControllerSelector</td><td>Selects the controller.</td></tr>
-								<tr class="fragment"><td>IHttpControllerTypeResolver</td><td>Gets the list of controller types.</td></tr>
 								<tr class="fragment"><td>IHttpControllerTypeResolver</td><td>Gets the list of controller types.</td></tr>
 								<tr class="fragment"><td>IAssembliesResolver</td><td>Get the list of project assemblies.</td></tr>
 								<tr class="fragment"><td>IHttpControllerActivator</td><td>Create new controller instances.</td></tr>
