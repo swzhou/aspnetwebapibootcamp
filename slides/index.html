@@ -41,8 +41,8 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>ASP.NET Web API</h1>
-					<h3>Fully customizable web framework</h3>
+					<h1>ASP.NET WebAPI</h1>
+					<h3>design for extensibility</h3>
 					<p>
 						<small>Shiwei Zhou</small>
 					</p>
@@ -51,21 +51,11 @@
 					<h2>Agenda</h2>
 					<ul>
 						<li>Http message lifecycle</li>
-						<li>
-							Basic extension point
-							<ul>
-								<li>Message handlers</li>
-								<li>Action filters</li>
-							</ul>
-						</li>
-						<li>
-							Advanced extension point
-							<ul>
-								<li>Dependency Injection</li>
-								<li>Model Binding</li>
-								<li>Result Conversion</li>
-							</ul>
-						</li>
+						<li>Message handlers</li>
+						<li>Route processing</li>
+						<li>Model Binding</li>
+						<li>Action filters</li>
+						<li>Result Conversion</li>
 					</ul>
 				</section>
 				<section>
@@ -250,6 +240,11 @@ Task&lt;HttpResponseMessage&gt; SendAsync(
 								<tr><td class="highlight">IHttpActionInvoker</td><td>Invokes the action.</td></tr>
 							</tbody>
 						</table>
+						<div style="margin-top:30px;" class="fragment">
+							<h3>Example</h3>
+							<a href="http://www.strathweb.com/2013/01/magical-web-api-action-selector-http-verb-and-action-name-dispatching-in-a-single-controller/" target="_blank">Magical Web API action selector – HTTP-verb and action name dispatching in a single controller</a>
+						</div>
+						
 					</section>
 				</section>
 				<section>
