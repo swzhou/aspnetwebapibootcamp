@@ -193,6 +193,40 @@ Task&lt;HttpResponseMessage&gt; SendAsync(
 						</ol>
 					</section>
 					<section>
+						<img src="images/select_controller.png">
+					</section>
+					<section>
+						<img src="images/select_controller2.png">
+					</section>					
+					<section>
+						<h2>Extension Points</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Interface</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr><td class="highlight">IHttpControllerSelector</td><td>Selects the controller.</td></tr>
+								<tr><td class="highlight">IHttpControllerTypeResolver</td><td>Gets the list of controller types.</td></tr>
+								<tr><td class="highlight">IAssembliesResolver</td><td>Get the list of project assemblies.</td></tr>
+								<tr><td class="highlight">IHttpControllerActivator</td><td>Create new controller instances.</td></tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<a href="http://www.strathweb.com/2013/08/customizing-controller-discovery-in-asp-net-web-api/" target="_blank">Customizing controller discovery in ASP.NET Web API</a>
+					</section>
+					<section>
+						<h2>Code Analysis - Dependency injection</h2>
+						<ul>
+							<li><a href="http://www.asp.net/web-api/overview/advanced/dependency-injection" target="_blank">Dependency Injection in ASP.NET Web API 2</a></li>
+							<li>How to use IoC to Inject dependency for web api controller?</li>
+						</ul>
+					</section>
+					<section>
 						<h2>Action Selection</h2>
 						<blockquote>IHttpActionSelector.SelectAction (HttpControllerContext) -> HttpActionDescriptor</blockquote>
 						<ol>
@@ -201,14 +235,6 @@ Task&lt;HttpResponseMessage&gt; SendAsync(
 							<li class="fragment">Try to match action parameters to the URI.</li>
 							<li class="fragment">Ignore actions with the [NonAction] attribute.</li>
 						</ol>
-					</section>
-					<section>
-						<h2>Routing Variations</h2>
-						<ul>
-							<li>HTTP Methods: HttpGet, HttpPost, HttpPut, HttpDelete, AcceptVerbs</li>
-							<li>By action name: ActionName</li>
-							<li>Non-Actions: NonAction</li>
-						</ul>
 					</section>
 					<section>
 						<h2>Extension Points</h2>
@@ -220,16 +246,11 @@ Task&lt;HttpResponseMessage&gt; SendAsync(
 								</tr>
 							</thead>
 							<tbody>
-								<tr class="fragment"><td>IHttpControllerSelector</td><td>Selects the controller.</td></tr>
-								<tr class="fragment"><td>IHttpControllerTypeResolver</td><td>Gets the list of controller types.</td></tr>
-								<tr class="fragment"><td>IAssembliesResolver</td><td>Get the list of project assemblies.</td></tr>
-								<tr class="fragment"><td>IHttpControllerActivator</td><td>Create new controller instances.</td></tr>
-								<tr class="fragment"><td>IHttpActionSelector</td><td>Selects the action.</td></tr>
-								<tr class="fragment"><td>IHttpActionInvoker</td><td>Invokes the action.</td></tr>
+								<tr><td class="highlight">IHttpActionSelector</td><td>Selects the action.</td></tr>
+								<tr><td class="highlight">IHttpActionInvoker</td><td>Invokes the action.</td></tr>
 							</tbody>
 						</table>
 					</section>
-
 				</section>
 				<section>
 					<section>
