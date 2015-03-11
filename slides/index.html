@@ -132,6 +132,38 @@ Task&lt;HttpResponseMessage&gt; SendAsync(
 					</section>
 				</section>
 				<section>
+
+					<section>
+						<h2>Filters</h2>
+						<p>A great way to add extra functionality to Web API service.</p>
+						<ul>
+							<li>Action Filters</li>
+							<li>Exception Filters</li>
+							<li style="color: #555555;">Authorization Filters</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Filters invocation process</h2>
+						<img src="images/webapifilters01.png">
+					</section>
+					<section>
+						<h2><span class="highlight">Action Filter</span> <br/>OR<br/> <span class="highlight">MessageHandler</span></h2>
+						<blockquote class="fragment">The major difference between their two is their focus.  Message Handlers are applied to all HTTP requests. They perform the function of an HTTP intermediary.  Filters apply only to requests that are dispatched to the particular controller/action where the filter is applied.</blockquote>
+						<blockquote class="fragment">You should use MessageHandlers when you want the behaviour to be applied to the vast majority of requests.  Filters should be used when they are only applicable to certain resources.</blockquote>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<ul>
+							<li>Handling request model validation</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Exception Filters</h2>
+						<p>An exception filter is executed when a controller method throws any unhandled exception that is not an HttpResponseException exception.</p>
+						<pre><code data-trim contenteditable class="c#">public virtual void OnException(HttpActionExecutedContext actionExecutedContext);</code></pre>
+					</section>
+				</section>
+				<section>
 					<section>
 						<h2>Routing</h2>
 						<ul>

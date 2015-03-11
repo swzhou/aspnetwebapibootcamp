@@ -13,6 +13,7 @@ namespace AspnetWebapiBootcamp
             // Web API configuration and services
             config.MessageHandlers.Add(new MethodOverrideHandler());
             config.MessageHandlers.Add(new AngularJsonVulnerabilityProtectionHandler());
+
             // Web API routes
             config.MapHttpAttributeRoutes();
             
