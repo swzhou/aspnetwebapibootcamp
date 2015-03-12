@@ -343,33 +343,8 @@ public class GeoPoint { ... }
 				
 				<section>
 					<section>
-						<h2>Available results</h2>
-						<table>
-							<thead>
-								<tr>
-									<th>Return type</th>
-									<th>How to creates the response</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>void</td>
-									<td class="fragment">Return empty 204 (No Content)</td>
-								</tr>
-								<tr>
-									<td>HttpResponseMessage</td>
-									<td class="fragment">Convert directly to an HTTP response message</td>
-								</tr>
-								<tr>
-									<td>IHttpActionResult</td>
-									<td class="fragment">Call ExecuteAsync to create an HttpResponseMessage, then convert to an HTTP response message.</td>
-								</tr>
-								<tr>
-									<td>Other type</td>
-									<td class="fragment">Write the serialized return value into the response body; return 200 (OK).</td>
-								</tr>
-							</tbody>
-						</table>
+						<h2>Result Conversion</h2>
+						<img src="images/action_return_value.png">
 					</section>
 					<section>
 						<h2>Why IHttpActionResult?</h2>
@@ -385,6 +360,45 @@ public class GeoPoint { ... }
 							<li>More staight-forward</li>
 							<li class="fragment">But cannot directly return an error code</li>
 						</ul>
+					</section>
+					<section>
+						<h2>Extension points</h2>
+						<table>
+							<thead>
+								<tr>
+									<th>Interface</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr><td class="highlight">IContentNegotiator</td><td>Select proper media type formatter.</td></tr>
+								<tr><td class="highlight">MediaTypeFormatter</td><td>Serializes and deserializes the HTTP message body.</td></tr>
+							</tbody>
+						</table>
+					</section>
+					<section>
+						<h2>Select formatter - DefaultContentNegotiator</h2>
+						<ol>
+							<li>Identify "candidates": MediaTypeFormatter.CanWriteType</li>
+							<li>Select "best"
+								<ul>
+									<li>SupportedMediaTypes collection</li>
+									<li>MediaTypeMappings collection</li>
+								</ul>
+							</li>
+						</ol>
+					</section>
+					<section>
+						<h2>JSON Media-Type Formatter</h2>
+
+					</section>
+					<section>
+						<h2>Custom Converter</h2>
+						
+					</section>
+					<section>
+						<h2>Custom Media-Type Formatter</h2>
+
 					</section>
 				</section>
 			</div>
