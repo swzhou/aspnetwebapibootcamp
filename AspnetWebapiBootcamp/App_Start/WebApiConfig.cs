@@ -15,7 +15,6 @@ namespace AspnetWebapiBootcamp
             config.MessageHandlers.Add(new AngularJsonVulnerabilityProtectionHandler());
 
             // Web API routes
-            config.MapHttpAttributeRoutes();
             
             var handlers = new DelegatingHandler[]
             {
