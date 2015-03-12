@@ -122,99 +122,7 @@ Task&lt;HttpResponseMessage&gt; SendAsync(
 					</section>
 				</section>
 
-				<section>
-					<section>
-						<h2>Parameter binding</h2>
-						<img src="images/action_parameters.png">
-					</section>
-					<section>
-						<h2>Default binding rule</h2>
-						<ul>
-							<li>“simple” type -> from URI
-								<ul class="fragment">
-									<li>.NET primitive types (int, bool, double, and so forth)</li>
-									<li>TimeSpan, DateTime, Guid, decimal, and string</li>
-									<li>any type with a type converter that can convert from a string.</li>
-								</ul>
-							</li>
-							<li>Complex types -> from body</li>
-						</ul>
-					</section>
-					<section>
-						<h2>Customization binding process</h2>
-						<ul>
-							<li>[FromUri]</li>
-							<li>[FromBody]</li>
-							<li>Type Converters</li>
-							<li>Model Binders</li>
-							<li>HttpParameterBinding</li>
-							<li>IActionValueBinder</li>
-						</ul>
-					</section>
-					<section>
-						<h2>FromUri</h2>
-						<pre><code data-trim contenteditable class="java">
-public class GeoPoint
-{
-    public double Latitude { get; set; } 
-    public double Longitude { get; set; }
-}
-
-public ValuesController : ApiController
-{
-    public HttpResponseMessage Get([FromUri] GeoPoint location) { ... }
-}							
-						</code></pre>
-						<blockquote class="fragment">http://localhost/api/values/?<span class="highlight">Latitude</span>=47.678558&<span class="highlight">Longitude</span>=-122.130989</blockquote>
-					</section>
-					<section>
-						<h2>FromBody</h2>
-						<pre><code data-trim contenteditable class="java">
-public HttpResponseMessage Post([FromBody] string name) { ... }							
-						</code></pre>
-						<pre class="fragment"><code data-trim contenteditable class="java">
-POST http://localhost:5076/api/values HTTP/1.1
-User-Agent: Fiddler
-Host: localhost:5076
-Content-Type: application/json
-Content-Length: 7
-
-"Alice"						
-						</code></pre>
-						<div class="fragment highlight">At most one parameter is allowed to read from the message body. </div>
-					</section>
-					<section>
-						<h2>Type Converter</h2>
-						<ol>
-							<li class="fragment">Implement TypeConverter
-						<pre><code data-trim contenteditable class="java">
-public class TypeConverter {
-
-	public virtual bool CanConvertFrom(ITypeDescriptorContext context, 
-				Type sourceType)	{...}
-
-	public override object ConvertFrom(ITypeDescriptorContext context, 
-        		CultureInfo culture, object value) {...}					
-
-    ...
-}
-						</code></pre>
-							</li>
-							<li class="fragment">Decorated the target model with a [TypeConverter] attribute to specify the type converte
-								<pre><code data-trim contenteditable class="java">
-[TypeConverter(typeof(GeoPointConverter))]
-public class GeoPoint { ... }
-								</code></pre>
-							</li>
-						</ol>
-					</section>
-					<section>
-						<h2>Example</h2>
-						<h3>GeoPointConverter</h3>
-					</section>
-				</section>
-
-				<section>
+								<section>
 					<section>
 						<h2>Routing</h2>
 						<ul>
@@ -311,6 +219,141 @@ public class GeoPoint { ... }
 
 				<section>
 					<section>
+						<h2>Parameter binding</h2>
+						<img src="images/action_parameters.png">
+					</section>
+					<section>
+						<h2>Default binding rule</h2>
+						<ul>
+							<li>“simple” type -> from URI
+								<ul class="fragment">
+									<li>.NET primitive types (int, bool, double, and so forth)</li>
+									<li>TimeSpan, DateTime, Guid, decimal, and string</li>
+									<li>any type with a type converter that can convert from a string.</li>
+								</ul>
+							</li>
+							<li>Complex types -> from body</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Customization binding process</h2>
+						<ul>
+							<li>[FromUri]</li>
+							<li>[FromBody]</li>
+							<li>Type Converters</li>
+							<li>Model Binders</li>
+							<li>HttpParameterBinding</li>
+							<li>IActionValueBinder</li>
+						</ul>
+					</section>
+					<section>
+						<h2>FromUri</h2>
+						<pre><code data-trim contenteditable class="java">
+public class GeoPoint
+{
+    public double Latitude { get; set; } 
+    public double Longitude { get; set; }
+}
+
+public ValuesController : ApiController
+{
+    public HttpResponseMessage Get([FromUri] GeoPoint location) { ... }
+}							
+						</code></pre>
+						<blockquote class="fragment">http://localhost/api/values/?<span class="highlight">Latitude</span>=47.678558&<span class="highlight">Longitude</span>=-122.130989</blockquote>
+					</section>
+					<section>
+						<h2>FromBody</h2>
+						<pre><code data-trim contenteditable class="java">
+public HttpResponseMessage Post([FromBody] string name) { ... }							
+						</code></pre>
+						<pre class="fragment"><code data-trim contenteditable class="java">
+POST http://localhost:5076/api/values HTTP/1.1
+User-Agent: Fiddler
+Host: localhost:5076
+Content-Type: application/json
+Content-Length: 7
+
+"Alice"						
+						</code></pre>
+						<div class="fragment highlight">At most one parameter is allowed to read from the message body. </div>
+					</section>
+					<section>
+						<h2>Type Converter</h2>
+						<ol>
+							<li class="fragment">Implement TypeConverter
+						<pre><code data-trim contenteditable class="java">
+public class TypeConverter {
+
+	public virtual bool CanConvertFrom(ITypeDescriptorContext context, 
+				Type sourceType)	{...}
+
+	public override object ConvertFrom(ITypeDescriptorContext context, 
+        		CultureInfo culture, object value) {...}					
+
+    ...
+}
+						</code></pre>
+							</li>
+							<li class="fragment">Decorated the target model with a [TypeConverter] attribute to specify the type converte
+								<pre><code data-trim contenteditable class="java">
+[TypeConverter(typeof(GeoPointConverter))]
+public class GeoPoint { ... }
+								</code></pre>
+							</li>
+						</ol>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<p>GeoPointConverter</p>
+					</section>
+					<section>
+						<h2>Model Binder</h2>
+						<pre><code data-trim contenteditable class="java">
+public interface IModelBinder
+{
+    bool BindModel(HttpActionContext actionContext, ModelBindingContext bindingContext);
+}
+						</code></pre>
+						<ul>
+							<li>flexible than type converter</li>
+							<li>able to access request, action description, and the raw value from route data.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>Example</h2>
+						<p>GeoPointModelBinder</p>
+					</section>
+					<section>
+						<h2>IValueProvider</h2>
+						<ul>
+							<li>The value provider takes the HTTP request and populates a dictionary of key-value pairs.</li>
+							<li>The model binder uses this dictionary to populate the model.</li>
+						</ul>
+					</section>
+					<section>
+						<h2>HttpParameterBinding</h2>
+						<ul>
+							<li>resonsible for binding a parameter to a value.</li>
+							<li>can read any part of the HTTP request.</li>
+							<li>Example: bind ETag parameter</li>
+						</ul>
+					</section>
+					<section>
+						<h2>IActionValueBinder</h2>
+						<p>control the entire parameter-binding process.</p>
+						<ol>
+							<li>Look for a ParameterBindingAttribute on the parameter. This includes [FromBody], [FromUri], and [ModelBinder], or custom attributes.</li>
+							<li>Otherwise, look in HttpConfiguration.ParameterBindingRules for a function that returns a non-null HttpParameterBinding.</li>
+							<li>Otherwise, use the default rules.</li>
+						</ol>
+					</section>
+				</section>
+
+
+
+				<section>
+					<section>
 						<h2>Filters</h2>
 						<p>A great way to add extra functionality to Web API service.</p>
 						<ul>
@@ -349,7 +392,6 @@ public class GeoPoint { ... }
 					<section>
 						<h2>Why IHttpActionResult?</h2>
 						<ul>
-							<li>Simplifies unit testings of controller.</li>
 							<li class="fragment">Moves common logic for creating HTTP responses into separate classes.</li>
 							<li class="fragment">Make the intent of the controller action clearer by hiding the low-level details of constructing the response.</li>
 						</ul>
@@ -400,6 +442,20 @@ public class GeoPoint { ... }
 						<h2>Custom Media-Type Formatter</h2>
 
 					</section>
+				</section>
+				<section>
+					<h2>Recall</h2>
+					<ul>
+						<li>Http message lifecycle</li>
+						<li>Message handlers</li>
+						<li>Route processing</li>
+						<li>Parameter Binding</li>
+						<li>Action filters</li>
+						<li>Result Conversion</li>
+					</ul>
+				</section>
+				<section>
+					<h1>Q & A</h1>
 				</section>
 			</div>
 

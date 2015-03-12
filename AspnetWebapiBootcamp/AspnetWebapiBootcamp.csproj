@@ -78,7 +78,9 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\ActionsController.cs" />
+    <Compile Include="Controllers\EtagController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

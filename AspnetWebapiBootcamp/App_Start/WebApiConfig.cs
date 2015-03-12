@@ -2,6 +2,10 @@
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
+using System.Web.Http.ModelBinding;
+using System.Web.Http.ModelBinding.Binders;
+using System.Web.Http.ValueProviders;
+using AspnetWebapiBootcamp.Controllers;
 using AspnetWebapiBootcamp.Handlers;
 
 namespace AspnetWebapiBootcamp
@@ -41,6 +45,19 @@ namespace AspnetWebapiBootcamp
                 defaults: new { id = RouteParameter.Optional }
                 );
 
+            var provider = new SimpleModelBinderProvider(typeof(GeoPoint), new GeoPointModelBinder());
+            config.Services.Insert(typeof(ModelBinderProvider), 0, provider);
+            config.Services.Add(typeof(ValueProviderFactory), new HeaderValueProviderFactory());
+            
+//            config.ParameterBindingRules.Add(p =>
+//            {
+//                if (p.ParameterType == typeof(ETag) &&
+//                    p.ActionDescriptor.SupportedHttpMethods.Contains(HttpMethod.Get))
+//                {
+//                    return new ETagParameterBinding(p, ETagMatch.IfNoneMatch);
+//                }
+//                return null;
+//            });
         }
     }
 }
