@@ -432,7 +432,18 @@ public interface IModelBinder
 					</section>
 					<section>
 						<h2>JSON Media-Type Formatter</h2>
-
+						<ul>
+							<li class="fragment">What to serialize: JsonIgnore OR DataContract/DataMember</li>
+							<li class="fragment">Date
+								<ul>
+									<li>Timezone: JsonFormatter.SerializerSettings.DateTimeZoneHandling</li>
+									<li>Date format: JsonFormatter.SerializerSettings.DateFormatHandling</li>
+								</ul>
+							</li>
+							<li class="fragment">Indenting: JsonFormatter.SerializerSettings.Formatting</li>
+							<li class="fragment">Camel Casing: JsonFormatter.SerializerSettings.ContractResolver</li>
+							<li class="fragment">Circular object reference: JsonFormatter.SerializerSettings.PreserveReferencesHandling</li>
+						</ul>
 					</section>
 					<section>
 						<h2>Custom Converter</h2>
@@ -453,6 +464,11 @@ public interface IModelBinder
 						<li>Action filters</li>
 						<li>Result Conversion</li>
 					</ul>
+				</section>
+				<section>
+					<p>Actually...</p>
+					<p class="fragment">The whole framework is</p>
+					<p class="fragment"><a href="http://www.asp.net/web-api/overview/advanced/configuring-aspnet-web-api" target="_blank">configurable</a></p>
 				</section>
 				<section>
 					<h1>Q & A</h1>
